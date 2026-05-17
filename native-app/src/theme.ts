@@ -40,3 +40,25 @@ export const colors = {
     gradientAccent: ["#22c993", "#1a6a90"],
   },
 };
+
+export const fonts = {
+  display: "PlusJakartaSans",
+  body: "DMSans",
+};
+
+export const shadows = {
+  card: {
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.06,
+    shadowRadius: 8,
+    elevation: 3,
+  },
+  elevated: {
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.12,
+    shadowRadius: 24,
+    elevation: 8,
+  },
+};
