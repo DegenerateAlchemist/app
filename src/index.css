@@ -1,21 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-  --primary-color: #3333a0;
-  --primary-light: #4444c0;
-  --secondary-color: #1a9e7a;
-  --bg-light: #F9F9FB;
-  --text-dark: #3333a0;
-  --text-gray: #5e6b80;
+  --primary-color: #2b2b91;
+  --primary-light: #3d3dbf;
+  --secondary-color: #168c6b;
+  --bg-light: #f5f6fa;
+  --text-dark: #1f1f63;
+  --text-gray: #4b586e;
   --white: #FFFFFF;
-  --glass-bg: rgba(255, 255, 255, 0.85);
-  --glass-border: rgba(255, 255, 255, 0.3);
-  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-  --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
-  --shadow-lg: 0 20px 25px -5px rgba(51, 51, 160, 0.08), 0 10px 10px -5px rgba(51, 51, 160, 0.04);
-  --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  --gradient-balance: linear-gradient(135deg, #3333a0 0%, #1a9e7a 100%);
-  --gradient-btn: linear-gradient(135deg, #3333a0 0%, #1a9e7a 100%);
+  --glass-bg: rgba(255, 255, 255, 0.65);
+  --glass-border: rgba(255, 255, 255, 0.45);
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.03);
+  --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 16px 32px rgba(43, 43, 145, 0.08), 0 8px 16px rgba(43, 43, 145, 0.03);
+  --transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  --gradient-balance: linear-gradient(135deg, #2b2b91 0%, #168c6b 100%);
+  --gradient-btn: linear-gradient(135deg, #2b2b91 0%, #168c6b 100%);
 }
 
 * {
