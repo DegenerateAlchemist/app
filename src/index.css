@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+}
+
 :root {
   --primary-color: #2b2b91;
   --primary-light: #3d3dbf;

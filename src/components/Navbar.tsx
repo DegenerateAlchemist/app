@@ -39,6 +39,7 @@ const Navbar = () => {
           <a href="#engine">Wow Engine</a>
           <a href="#stellar">Stellar Network</a>
           <a href="#anchors">Anchors</a>
+          <a href="#calculator">Calculator</a>
         </nav>
         
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
@@ -79,6 +80,7 @@ const Navbar = () => {
               <a href="#engine" onClick={() => setMobileMenuOpen(false)} style={{ fontSize: '1.1rem', fontWeight: 600 }}>Wow Engine</a>
               <a href="#stellar" onClick={() => setMobileMenuOpen(false)} style={{ fontSize: '1.1rem', fontWeight: 600 }}>Stellar Network</a>
               <a href="#anchors" onClick={() => setMobileMenuOpen(false)} style={{ fontSize: '1.1rem', fontWeight: 600 }}>Anchors</a>
+              <a href="#calculator" onClick={() => setMobileMenuOpen(false)} style={{ fontSize: '1.1rem', fontWeight: 600 }}>Calculator</a>
               <hr style={{ borderColor: 'rgba(51, 51, 160, 0.1)' }} />
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 <button className="btn btn-outline" style={{ width: '100%' }}>Sign In</button>
