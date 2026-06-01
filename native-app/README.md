@@ -18,4 +18,26 @@
   
 </table>
 
+## Developer Guide & Setup
+
+### Local Installation
+1. Install project dependencies:
+   ```bash
+   npm install
+   ```
+2. Start the Expo development server:
+   ```bash
+   npx expo start
+   ```
+
+### State Architecture
+The application uses a unified global `WalletProvider` (`src/WalletContext.tsx`) context that hosts:
+- `balance`: The current reactive wallet balance in USD.
+- `transactions`: The transaction history ledger.
+- `deposit() / withdraw() / addTransaction()`: Functions to execute state-changing activities globally.
+
+### Mock Data Extensions
+To add new contacts or initial transactions, modify `src/data/mockData.ts`.
+
+
 
