@@ -1,73 +1,32 @@
-# React + TypeScript + Vite
+# Whales of Wallstreet (WOW) - Marketing Site
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The frontend marketing presence and client-side simulation workspace for the Whales of Wallstreet ecosystem. It contains interactive tools designed to demonstrate the pathfinding capabilities and Stellar anchor onboarding workflows of the **Wow Engine**.
 
-Currently, two official plugins are available:
+## Features & Modules
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+### 1. Interactive Quoting Engine Calculator
+Located at `#calculator`, this widget communicates directly with the local running instance of the Wow Engine (`http://127.0.0.1:8080/api/v1/quote`) to calculate pathfinding routes across Solana, Stellar, Arbitrum, and Ethereum.
+- Toggles between native Circle CCTP routes (1:1 conversions) and deBridge DLN channels (0.1% protocol fee).
+- Renders results sorted dynamically by maximum output followed by lowest fee.
 
-## React Compiler
+### 2. Stellar Anchor Flow Simulator
+Located at `#anchors`, this widget acts as a client dashboard simulating SEP-24 deposits (on-ramps) and withdrawals (off-ramps) with interactive callback handlers.
+- Initiates transaction records on the Rust backend state tracker.
+- Pulls transactional sessions to trigger anchor interactive customer verification links.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Local Setup
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Installation
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Running Dev Server
+```bash
+npm run dev
+```
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Running Unit Tests
+```bash
+npm run test
 ```
