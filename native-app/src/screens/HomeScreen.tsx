@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import {
-  View, Text, TouchableOpacity, Image, ScrollView, StyleSheet, Modal, Pressable,
+  View, Text, TouchableOpacity, Image, ScrollView, StyleSheet, RefreshControl,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import { useTheme } from "../ThemeContext";
-import { currentUser, transactions } from "../data/mockData";
+import { useWallet } from "../WalletContext";
+import { currentUser } from "../data/mockData";
 import BalanceCard from "../components/BalanceCard";
 import ActionButtons from "../components/ActionButtons";
 import QuickContacts from "../components/QuickContacts";
@@ -14,6 +15,15 @@ import { shadows } from "../theme";
 
 const HomeScreen = ({ navigation }: any) => {
   const { c } = useTheme();
+  const { balance, transactions } = useWallet();
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = () => {
+    setRefreshing(true);
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 1500);
+  };
 
   const hour = new Date().getHours();
   const greeting = hour < 12 ? "Good morning" : hour < 18 ? "Good afternoon" : "Good evening";
@@ -21,7 +31,14 @@ const HomeScreen = ({ navigation }: any) => {
 
   return (
     <SafeAreaView style={[styles.safe, { backgroundColor: c.background }]} edges={["top"]}>
-      <ScrollView style={styles.scroll} contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
+      <ScrollView
+        style={styles.scroll}
+        contentContainerStyle={styles.content}
+        showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={c.primary} />
+        }
+      >
         {/* Header */}
         <View style={styles.header}>
           <View style={styles.userRow}>
@@ -52,7 +69,7 @@ const HomeScreen = ({ navigation }: any) => {
 
         {/* Balance */}
         <View style={styles.section}>
-          <BalanceCard balance={currentUser.balance} />
+          <BalanceCard balance={balance} />
         </View>
 
         {/* Actions */}
