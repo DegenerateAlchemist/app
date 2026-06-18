@@ -13,25 +13,43 @@ impl Sep38Client {
         }
     }
 
-    pub async fn get_quote(
+    pub async fn get_indicative_quote(
         &self,
         _anchor_domain: &str,
         sell_asset: &str,
         buy_asset: &str,
         sell_amount: f64,
     ) -> Result<Sep38Quote, anyhow::Error> {
+        self.generate_quote(_anchor_domain, sell_asset, buy_asset, sell_amount, 15)
+    }
+
+    pub async fn get_firm_quote(
+        &self,
+        _anchor_domain: &str,
+        sell_asset: &str,
+        buy_asset: &str,
+        sell_amount: f64,
+    ) -> Result<Sep38Quote, anyhow::Error> {
+        self.generate_quote(_anchor_domain, sell_asset, buy_asset, sell_amount, 5) // Firm quotes expire faster
+    }
+
+    fn generate_quote(
+        &self,
+        _anchor_domain: &str,
+        sell_asset: &str,
+        buy_asset: &str,
+        sell_amount: f64,
+        expiration_minutes: i64,
+    ) -> Result<Sep38Quote, anyhow::Error> {
         let quote_id = format!("q_sep38_{}", uuid_fast());
         
-        // Simulates query to anchor's `https://<domain>/sep38/quote`
-        // Model real exchange rates: e.g. converting 1 USDC to NGN or EUR
         let (price, buy_amount) = match buy_asset {
             b if b.contains("NGN") => (1450.0, sell_amount * 1450.0),
             b if b.contains("EUR") => (0.92, sell_amount * 0.92),
             _ => (1.0, sell_amount),
         };
 
-        // Formulate standard ISO-8601 UTC date string
-        let expires_at = (chrono::Utc::now() + chrono::Duration::minutes(15))
+        let expires_at = (chrono::Utc::now() + chrono::Duration::minutes(expiration_minutes))
             .to_rfc3339_opts(chrono::SecondsFormat::Secs, true);
 
         Ok(Sep38Quote {

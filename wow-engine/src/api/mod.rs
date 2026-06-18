@@ -168,7 +168,7 @@ async fn anchor_quote_handler(
     }
 
     let client = Sep38Client::new();
-    match client.get_quote(
+    match client.get_indicative_quote(
         &payload.anchor_domain,
         &payload.sell_asset,
         &payload.buy_asset,
