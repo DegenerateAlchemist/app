@@ -42,3 +42,151 @@ The server listens on port 8080 and provides the following endpoints:
    cargo run
    ```
 4. The service will be active at `http://127.0.0.1:8080`.
+
+## API Usage Examples
+
+### Health Check
+
+```bash
+curl http://localhost:8080/api/v1/health
+```
+
+```json
+{
+  "status": "ok",
+  "service": "wow-engine",
+  "version": "0.1.0",
+  "timestamp": "2026-06-19T08:14:00Z"
+}
+```
+
+---
+
+### Cross-Chain Quote
+
+Returns ranked bridge routes from a source chain into Stellar, sorted by best output amount.
+
+```bash
+curl -X POST http://localhost:8080/api/v1/quote \
+  -H "Content-Type: application/json" \
+  -d '{
+    "from_chain": "Ethereum",
+    "to_chain": "Stellar",
+    "asset": "USDC",
+    "amount": 100.0
+  }'
+```
+
+```json
+{
+  "routes": [
+    {
+      "provider": "CCTP",
+      "from_chain": "Ethereum",
+      "to_chain": "Stellar",
+      "asset": "USDC",
+      "amount_in": 100.0,
+      "amount_out": 99.98,
+      "fee": 0.02,
+      "estimated_time_seconds": 20
+    },
+    {
+      "provider": "deBridge",
+      "from_chain": "Ethereum",
+      "to_chain": "Stellar",
+      "asset": "USDC",
+      "amount_in": 100.0,
+      "amount_out": 99.90,
+      "fee": 0.10,
+      "estimated_time_seconds": 15
+    }
+  ]
+}
+```
+
+---
+
+### Anchor Deposit (SEP-24)
+
+Initiates an interactive on-ramp deposit flow via a registered Stellar anchor.
+
+```bash
+curl -X POST http://localhost:8080/api/v1/anchor/deposit \
+  -H "Content-Type: application/json" \
+  -d '{
+    "anchor_domain": "testanchor.stellar.org",
+    "asset_code": "USDC",
+    "account": "GXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+  }'
+```
+
+```json
+{
+  "transaction_id": "tx_sep24_1a2b3c4d5e6f",
+  "url": "https://testanchor.stellar.org/sep24/interactive/deposit?asset_code=USDC&account=GXXX...",
+  "status": "pending_user_transfer_start"
+}
+```
+
+---
+
+### Anchor Withdraw (SEP-24)
+
+Initiates an interactive off-ramp withdrawal to local fiat via a Stellar anchor.
+
+```bash
+curl -X POST http://localhost:8080/api/v1/anchor/withdraw \
+  -H "Content-Type: application/json" \
+  -d '{
+    "anchor_domain": "testanchor.stellar.org",
+    "asset_code": "USDC",
+    "account": "GXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+  }'
+```
+
+```json
+{
+  "transaction_id": "tx_sep24_7f8e9d0c1b2a",
+  "url": "https://testanchor.stellar.org/sep24/interactive/withdraw?asset_code=USDC&account=GXXX...",
+  "status": "pending_user_transfer_start"
+}
+```
+
+---
+
+### Anchor Quote (SEP-38)
+
+Fetches an exchange rate quote between a Stellar asset and a fiat currency.
+
+```bash
+curl -X POST http://localhost:8080/api/v1/anchor/quote \
+  -H "Content-Type: application/json" \
+  -d '{
+    "sell_asset": "USDC",
+    "buy_asset": "NGN",
+    "sell_amount": 100.0
+  }'
+```
+
+```json
+{
+  "sell_asset": "USDC",
+  "buy_asset": "NGN",
+  "sell_amount": 100.0,
+  "buy_amount": 145000.0,
+  "price": 1450.0,
+  "expires_at": "2026-06-19T09:14:00Z"
+}
+```
+
+---
+
+## Environment Variables
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `PORT` | `8080` | TCP port the server listens on |
+
+```bash
+PORT=9090 cargo run
+```
