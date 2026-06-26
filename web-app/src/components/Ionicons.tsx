@@ -58,3 +58,4 @@ export const Ionicons = ({ name, size = 20, color = "currentColor", style }: Pro
 };
 
 export const MaterialCommunityIcons = Ionicons;
+export default Ionicons;
